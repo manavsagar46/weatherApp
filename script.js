@@ -1,4 +1,3 @@
-
 // let targateLocation = "new york";
 const feathchresult = async (targateLocation) => {
   let url = YOUR_API_KEY;
@@ -11,12 +10,14 @@ const feathchresult = async (targateLocation) => {
     return;
   }
 
-  let [locatioName, temp, humidity, windSpeed] = [
+  let [locatioName, temp, humidity, windSpeed, weatherCondition] = [
     data.location.name,
     data.current.temp_c,
     data.current.humidity,
     data.current.wind_kph,
+    data.current.condition.text,
   ];
+  console.log(weatherCondition);
 
   document.querySelector(".temp").innerHTML = `${temp}<sup>°</sup>C`;
   document.querySelector(".state").innerHTML = locatioName;
@@ -24,10 +25,30 @@ const feathchresult = async (targateLocation) => {
   document.querySelector(".windSpeed").innerHTML = `${Math.round(
     windSpeed
   )} kmph`;
+
+  let conditionLower = weatherCondition.toLowerCase();
+
+  if (conditionLower.includes("drizzle")) {
+    weatherIcon.src = "/images/drizzle.png";
+  } else if (conditionLower.includes("mist")) {
+    weatherIcon.src = "/images/mist.png";
+  } else if (
+    conditionLower.includes("sunny") ||
+    conditionLower.includes("clear")
+  ) {
+    weatherIcon.src = "/images/clear.png";
+  } else if (conditionLower.includes("snow")) {
+    weatherIcon.src = "/images/snow.png";
+  } else if (conditionLower.includes("cloud")) {
+    weatherIcon.src = "/images/clouds.png";
+  } else if (conditionLower.includes("rain")) {
+    weatherIcon.src = "/images/rain.png";
+  } else {
+    weatherIcon.src = "/images/clouds.png";
+  }
 };
 
 // feathchresult();
-
 
 // Common search handler
 const handleSearch = () => {
@@ -41,6 +62,7 @@ const handleSearch = () => {
 
 let searchInput = document.querySelector(".input_field input");
 let searchBtn = document.querySelector(".input_field button");
+let weatherIcon = document.querySelector(".tempImage");
 
 // Click event
 searchBtn.addEventListener("click", handleSearch);
