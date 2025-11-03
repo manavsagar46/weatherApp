@@ -1,7 +1,7 @@
 # 🌤️ Weather App
 
 A simple and responsive weather application that fetches real-time weather data using the [WeatherAPI](https://www.weatherapi.com/).  
-You can search any city and get details like **temperature**, **humidity**, **wind speed**, and weather conditions with an appropriate icon.
+You can search any city and get details like **temperature**, **humidity**, **wind speed**, and weather conditions with an appropriate icon..
 
 ---
 
